@@ -10,7 +10,7 @@ namespace CurrencyConverter.Presentation.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Policy = "RequireAdministratorRole")]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class CurrencyConverterController : ControllerBase
     {
         private readonly ICurrencyConverterService _currencyConverter;

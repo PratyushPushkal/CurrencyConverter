@@ -29,12 +29,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
-//builder.Services.AddJwtToken(builder.Configuration);
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("RequireAdministratorRole",
-//    policy => policy.RequireRole("Administrator"));
-//});
+builder.Services.AddJwtToken(builder.Configuration);
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdministratorRole",
+    policy => policy.RequireRole("Administrator"));
+});
 
 builder.Services.AddRateLimiter(_ => _
     .AddFixedWindowLimiter(policyName: "policyname", options =>
