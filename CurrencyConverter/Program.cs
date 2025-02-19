@@ -35,6 +35,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdministratorRole",
     policy => policy.RequireRole("Administrator"));
 });
+builder.Services.AddHealthChecks(builder.Configuration);
 
 builder.Services.AddRateLimiter(_ => _
     .AddFixedWindowLimiter(policyName: "policyname", options =>
@@ -60,6 +61,7 @@ else
 {
     app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 }
+app.MapHealthChecks("/health");
 app.UseRateLimiter();
 app.UseRouting()
     .UseAuthentication()

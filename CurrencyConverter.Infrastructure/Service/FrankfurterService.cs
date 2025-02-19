@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using CurrencyConverter.Domain;
 using CurrencyConverter.Domain.Model;
 using CurrencyConverter.Infrastructure.Interface;
 using Microsoft.Extensions.Caching.Memory;
@@ -32,7 +33,7 @@ namespace CurrencyConverter.Infrastructure.Service
             {
                 return cacheRates;
             }
-            _httpClient.BaseAddress = new Uri("https://api.frankfurter.app/");
+            _httpClient.BaseAddress = new Uri(Common.FrankfuterUrl);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = new HttpResponseMessage();
             response = await _httpClient.GetAsync($@"{sdate}..{edate}?base={currency}").ConfigureAwait(false);
@@ -56,7 +57,7 @@ namespace CurrencyConverter.Infrastructure.Service
             {
                 return cacheRates;
             }
-            _httpClient.BaseAddress = new Uri("https://api.frankfurter.app/");
+            _httpClient.BaseAddress = new Uri(Common.FrankfuterUrl);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = new HttpResponseMessage();
             response = await _httpClient.GetAsync($@"latest?base={currency}").ConfigureAwait(false);
